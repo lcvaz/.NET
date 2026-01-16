@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Vs code\\.NET\\Application\\Application.csproj": {}
+    "C:\\Vs code\\.NET\\infraestructure\\infraestructure.csproj": {}
   },
   "projects": {
-    "C:\\Vs code\\.NET\\Application\\Application.csproj": {
+    "C:\\Vs code\\.NET\\infraestructure\\infraestructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Vs code\\.NET\\Application\\Application.csproj",
-        "projectName": "Application",
-        "projectPath": "C:\\Vs code\\.NET\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Vs code\\.NET\\infraestructure\\infraestructure.csproj",
+        "projectName": "infraestructure",
+        "projectPath": "C:\\Vs code\\.NET\\infraestructure\\infraestructure.csproj",
         "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Vs code\\.NET\\Application\\obj\\",
+        "outputPath": "C:\\Vs code\\.NET\\infraestructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -44,9 +44,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "supabase-csharp": {
               "target": "Package",
-              "version": "[10.0.2, )"
+              "version": "[0.16.2, )"
             }
           },
           "imports": [
