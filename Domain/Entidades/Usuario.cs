@@ -21,8 +21,5 @@ public class Usuario
     [Required]
     public string SenhaHash { get; set; }
 
-    [MaxLength(15)]
-    public string Telefone { get; set; }
-
     public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 }

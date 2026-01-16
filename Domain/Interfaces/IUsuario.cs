@@ -8,6 +8,8 @@ namespace Interfaces.IUsuario;
 /// </summary>
 public interface IUsuario
 {
+    Task<Usuario> LoginAsync(string email, string senha, bool rememberMe);  
+    Task<Usuario> CadastrarAsync(string nome, string email, string senha); 
     Task<IEnumerable<Usuario>> GetAllUsuariosAsync();
     Task<Usuario> GetUsuarioByIdAsync(int id);
     Task<Usuario> GetUsuarioByEmailAsync(string email);
