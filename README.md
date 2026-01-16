@@ -1,7 +1,7 @@
-1. Comandos utilizados: 
-dotnet add package Swashbuckle.AspNetCore
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
-dotnet add package Microsoft.EntityFrameworkCore.Tools
+COMANDOS UTILIZADOS
 dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet add package supabase-csharp
 dotnet add package BCrypt.Net-Next
+
+dotnet new sln --name MySolution
+dotnet sln add folder1/folder2/myapp
