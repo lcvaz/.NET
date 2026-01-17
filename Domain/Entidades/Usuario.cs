@@ -1,23 +1,20 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-namespace Domain.Entidades.Usuario; 
+namespace Domain.Entidades.Usuario;
 
 [Table("Tbl_Usuario")]
-public class Usuario
+public class Usuario : BaseModel
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Auto-incrementa o ID
-    [Column("id")]
+    [PrimaryKey("id")]
     public int Id { get; set; }
 
     [Required]
-    [MaxLength(100)]
     [Column("nome")]
     public string Nome { get; set; }
 
     [Required]
-    [MaxLength(200)]
     [Column("email")]
     public string Email { get; set; }
 
