@@ -18,7 +18,7 @@ public class UsuarioService : IUsuarioService
         _usuarioRepository = usuarioRepository;
     }
 
-    public async Task<LoginDto> LoginAsync(string email, string senha, bool rememberMe)
+    public async Task<LoginDto?> LoginAsync(string email, string senha, bool rememberMe)
     {
         var usuario = await _usuarioRepository.GetUsuarioByEmailAsync(email);
 
@@ -35,7 +35,7 @@ public class UsuarioService : IUsuarioService
         };
     }
 
-    public async Task<CadastroDto> CadastrarAsync(string nome, string email, string senha)
+    public async Task<CadastroDto?> CadastrarAsync(string nome, string email, string senha)
     {
         var usuarioExistente = await _usuarioRepository.GetUsuarioByEmailAsync(email);
 
