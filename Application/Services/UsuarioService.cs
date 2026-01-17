@@ -1,5 +1,5 @@
 using Application.DTOs;
-using Domain.Entidades.Usuario;
+using Domain.DTOs;
 using Interfaces.IUsuario;
 using Interfaces.IUsuarioService;
 
@@ -18,45 +18,44 @@ public class UsuarioService : IUsuarioService
         _usuarioRepository = usuarioRepository;
     }
 
-    public async Task<LoginDto> LoginAsync(string email, string senha, bool rememberMe)
+    public async Task<ApiResponseDto<LoginDto>> LoginAsync(string email, string senha, bool rememberMe)
     {
-        var usuario = await _usuarioRepository.GetUsuarioByEmailAsync(email);
+        var resultado = await _usuarioRepository.GetUsuarioByEmailAsync(email);
 
-        if (usuario == null)
-            return null;
+        if (!resultado.Sucesso || resultado.Data == null)
+            return ApiResponseDto<LoginDto>.NotFound("Usuário não encontrado");
 
-        if (!BCrypt.Net.BCrypt.Verify(senha, usuario.SenhaHash))
-            return null;
+        if (!BCrypt.Net.BCrypt.Verify(senha, resultado.Data.SenhaHash))
+            return ApiResponseDto<LoginDto>.Unauthorized("Email ou senha inválidos");
 
-        return new LoginDto
+        var loginDto = new LoginDto
         {
-            Email = usuario.Email,
+            Email = resultado.Data.Email,
             Senha = string.Empty
         };
+
+        return ApiResponseDto<LoginDto>.Ok(loginDto, "Login realizado com sucesso");
     }
 
-    public async Task<CadastroDto> CadastrarAsync(string nome, string email, string senha)
+    public async Task<ApiResponseDto<CadastroDto>> CadastrarAsync(string nome, string email, string senha)
     {
         var usuarioExistente = await _usuarioRepository.GetUsuarioByEmailAsync(email);
 
-        if (usuarioExistente != null)
-            return null;
+        if (usuarioExistente.Sucesso && usuarioExistente.Data != null)
+            return ApiResponseDto<CadastroDto>.Conflict("Email já cadastrado");
 
-        var usuario = new Usuario
+        var resultado = await _usuarioRepository.CadastrarAsync(nome, email, senha);
+
+        if (!resultado.Sucesso || resultado.Data == null)
+            return ApiResponseDto<CadastroDto>.InternalServerError(resultado.Mensagem);
+
+        var cadastroDto = new CadastroDto
         {
-            Nome = nome,
-            Email = email,
-            SenhaHash = BCrypt.Net.BCrypt.HashPassword(senha),
-            DataCriacao = DateTime.UtcNow
-        };
-
-        await _usuarioRepository.AddUsuarioAsync(usuario);
-
-        return new CadastroDto
-        {
-            Nome = usuario.Nome,
-            Email = usuario.Email,
+            Nome = resultado.Data.Nome,
+            Email = resultado.Data.Email,
             Senha = string.Empty
         };
+
+        return ApiResponseDto<CadastroDto>.Created(cadastroDto, "Usuário cadastrado com sucesso");
     }
 }

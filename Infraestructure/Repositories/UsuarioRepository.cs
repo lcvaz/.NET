@@ -1,3 +1,4 @@
+using Domain.DTOs;
 using Domain.Entidades.Usuario;
 using Interfaces.IUsuario;
 
@@ -15,82 +16,177 @@ public class UsuarioRepository : IUsuario
         _supabaseClient = supabaseClient;
     }
 
-    public async Task<Usuario> LoginAsync(string email, string senha, bool rememberMe)
+    public async Task<RepositoryResponseDto<Usuario>> LoginAsync(string email, string senha, bool rememberMe)
     {
-        var response = await _supabaseClient
-            .From<Usuario>()
-            .Where(u => u.Email == email)
-            .Single();
-
-        return response;
-    }
-
-    public async Task<Usuario> CadastrarAsync(string nome, string email, string senha)
-    {
-        var usuario = new Usuario
+        try
         {
-            Nome = nome,
-            Email = email,
-            SenhaHash = BCrypt.Net.BCrypt.HashPassword(senha),
-            DataCriacao = DateTime.UtcNow
-        };
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Where(u => u.Email == email)
+                .Single();
 
-        var response = await _supabaseClient
-            .From<Usuario>()
-            .Insert(usuario);
+            if (response == null)
+                return RepositoryResponseDto<Usuario>.NotFound("Usuário não encontrado");
 
-        return response.Models.FirstOrDefault();
+            return RepositoryResponseDto<Usuario>.Ok(response, "Usuário encontrado");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<Usuario>.Error($"Erro ao buscar usuário: {ex.Message}");
+        }
     }
 
-    public async Task<IEnumerable<Usuario>> GetAllUsuariosAsync()
+    public async Task<RepositoryResponseDto<Usuario>> CadastrarAsync(string nome, string email, string senha)
     {
-        var response = await _supabaseClient
-            .From<Usuario>()
-            .Get();
+        try
+        {
+            var usuarioExistente = await _supabaseClient
+                .From<Usuario>()
+                .Where(u => u.Email == email)
+                .Single();
 
-        return response.Models;
+            if (usuarioExistente != null)
+                return RepositoryResponseDto<Usuario>.Conflict("Email já cadastrado");
+
+            var usuario = new Usuario
+            {
+                Nome = nome,
+                Email = email,
+                SenhaHash = BCrypt.Net.BCrypt.HashPassword(senha),
+                DataCriacao = DateTime.UtcNow
+            };
+
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Insert(usuario);
+
+            var usuarioCriado = response.Models.FirstOrDefault();
+            if (usuarioCriado == null)
+                return RepositoryResponseDto<Usuario>.Error("Erro ao criar usuário");
+
+            return RepositoryResponseDto<Usuario>.Ok(usuarioCriado, "Usuário cadastrado com sucesso");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<Usuario>.Error($"Erro ao cadastrar usuário: {ex.Message}");
+        }
     }
 
-    public async Task<Usuario> GetUsuarioByIdAsync(int id)
+    public async Task<RepositoryResponseDto<IEnumerable<Usuario>>> GetAllUsuariosAsync()
     {
-        var response = await _supabaseClient
-            .From<Usuario>()
-            .Where(u => u.Id == id)
-            .Single();
+        try
+        {
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Get();
 
-        return response;
+            return RepositoryResponseDto<IEnumerable<Usuario>>.Ok(response.Models, "Usuários encontrados");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<IEnumerable<Usuario>>.Error($"Erro ao buscar usuários: {ex.Message}");
+        }
     }
 
-    public async Task<Usuario> GetUsuarioByEmailAsync(string email)
+    public async Task<RepositoryResponseDto<Usuario>> GetUsuarioByIdAsync(int id)
     {
-        var response = await _supabaseClient
-            .From<Usuario>()
-            .Where(u => u.Email == email)
-            .Single();
+        try
+        {
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Where(u => u.Id == id)
+                .Single();
 
-        return response;
+            if (response == null)
+                return RepositoryResponseDto<Usuario>.NotFound("Usuário não encontrado");
+
+            return RepositoryResponseDto<Usuario>.Ok(response, "Usuário encontrado");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<Usuario>.Error($"Erro ao buscar usuário: {ex.Message}");
+        }
     }
 
-    public async Task AddUsuarioAsync(Usuario usuario)
+    public async Task<RepositoryResponseDto<Usuario>> GetUsuarioByEmailAsync(string email)
     {
-        await _supabaseClient
-            .From<Usuario>()
-            .Insert(usuario);
+        try
+        {
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Where(u => u.Email == email)
+                .Single();
+
+            if (response == null)
+                return RepositoryResponseDto<Usuario>.NotFound("Usuário não encontrado");
+
+            return RepositoryResponseDto<Usuario>.Ok(response, "Usuário encontrado");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<Usuario>.Error($"Erro ao buscar usuário: {ex.Message}");
+        }
     }
 
-    public async Task UpdateUsuarioAsync(Usuario usuario)
+    public async Task<RepositoryResponseDto<Usuario>> AddUsuarioAsync(Usuario usuario)
     {
-        await _supabaseClient
-            .From<Usuario>()
-            .Where(u => u.Id == usuario.Id)
-            .Update(usuario);
+        try
+        {
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Insert(usuario);
+
+            var usuarioCriado = response.Models.FirstOrDefault();
+            if (usuarioCriado == null)
+                return RepositoryResponseDto<Usuario>.Error("Erro ao adicionar usuário");
+
+            return RepositoryResponseDto<Usuario>.Ok(usuarioCriado, "Usuário adicionado com sucesso");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<Usuario>.Error($"Erro ao adicionar usuário: {ex.Message}");
+        }
     }
 
-    public async Task DeleteUsuarioAsync(int id)
+    public async Task<RepositoryResponseDto<Usuario>> UpdateUsuarioAsync(Usuario usuario)
     {
-        await _supabaseClient
-            .From<Usuario>()
-            .Where(u => u.Id == id)
-            .Delete();
+        try
+        {
+            var response = await _supabaseClient
+                .From<Usuario>()
+                .Where(u => u.Id == usuario.Id)
+                .Update(usuario);
+
+            var usuarioAtualizado = response.Models.FirstOrDefault();
+            if (usuarioAtualizado == null)
+                return RepositoryResponseDto<Usuario>.NotFound("Usuário não encontrado para atualização");
+
+            return RepositoryResponseDto<Usuario>.Ok(usuarioAtualizado, "Usuário atualizado com sucesso");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<Usuario>.Error($"Erro ao atualizar usuário: {ex.Message}");
+        }
+    }
+
+    public async Task<RepositoryResponseDto<bool>> DeleteUsuarioAsync(int id)
+    {
+        try
+        {
+            var usuarioExistente = await GetUsuarioByIdAsync(id);
+            if (!usuarioExistente.Sucesso)
+                return RepositoryResponseDto<bool>.NotFound("Usuário não encontrado para exclusão");
+
+            await _supabaseClient
+                .From<Usuario>()
+                .Where(u => u.Id == id)
+                .Delete();
+
+            return RepositoryResponseDto<bool>.Ok(true, "Usuário excluído com sucesso");
+        }
+        catch (Exception ex)
+        {
+            return RepositoryResponseDto<bool>.Error($"Erro ao excluir usuário: {ex.Message}");
+        }
     }
 }

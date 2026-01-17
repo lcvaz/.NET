@@ -1,3 +1,4 @@
+using Domain.DTOs;
 using Domain.Entidades.Usuario;
 
 namespace Interfaces.IUsuario;
@@ -8,12 +9,12 @@ namespace Interfaces.IUsuario;
 /// </summary>
 public interface IUsuario
 {
-    Task<Usuario> LoginAsync(string email, string senha, bool rememberMe);  
-    Task<Usuario> CadastrarAsync(string nome, string email, string senha); 
-    Task<IEnumerable<Usuario>> GetAllUsuariosAsync();
-    Task<Usuario> GetUsuarioByIdAsync(int id);
-    Task<Usuario> GetUsuarioByEmailAsync(string email);
-    Task AddUsuarioAsync(Usuario usuario);
-    Task UpdateUsuarioAsync(Usuario usuario);
-    Task DeleteUsuarioAsync(int id);
+    Task<RepositoryResponseDto<Usuario>> LoginAsync(string email, string senha, bool rememberMe);
+    Task<RepositoryResponseDto<Usuario>> CadastrarAsync(string nome, string email, string senha);
+    Task<RepositoryResponseDto<IEnumerable<Usuario>>> GetAllUsuariosAsync();
+    Task<RepositoryResponseDto<Usuario>> GetUsuarioByIdAsync(int id);
+    Task<RepositoryResponseDto<Usuario>> GetUsuarioByEmailAsync(string email);
+    Task<RepositoryResponseDto<Usuario>> AddUsuarioAsync(Usuario usuario);
+    Task<RepositoryResponseDto<Usuario>> UpdateUsuarioAsync(Usuario usuario);
+    Task<RepositoryResponseDto<bool>> DeleteUsuarioAsync(int id);
 }
