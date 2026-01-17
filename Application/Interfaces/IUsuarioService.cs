@@ -1,3 +1,5 @@
+using Application.DTOs;
+
 namespace Interfaces.IUsuarioService;
 
 /// <summary>
@@ -6,6 +8,7 @@ namespace Interfaces.IUsuarioService;
 /// </summary>
 public interface IUsuarioService
 {
-    Task<UsuarioLoginDto> LoginAsync(string email, string senha, bool rememberMe);  
-    Task<UsuarioCadastroDto> CadastrarAsync(string nome, string email, string senha); 
+    Task<LoginDto> LoginAsync(string email, string senha, bool rememberMe);  
+    Task<CadastroDto> CadastrarAsync(string nome, string email, string senha); 
 }
+

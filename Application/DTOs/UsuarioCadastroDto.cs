@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Application.DTOs;
 
-public class CadastroDTO
+public class CadastroDto
 {
     [Required(ErrorMessage = "O nome é obrigatório")]
     [MaxLength(100, ErrorMessage = "O nome deve ter no máximo 100 caracteres")]

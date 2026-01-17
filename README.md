@@ -5,3 +5,4 @@ dotnet add package BCrypt.Net-Next
 
 dotnet new sln --name MySolution
 dotnet sln add folder1/folder2/myapp
+dotnet add reference ../Application/Application.csproj 
