@@ -2,6 +2,7 @@ using Interfaces.IUsuario;
 using Interfaces.IUsuarioService;
 using Infraestructure.Repositories;
 using Application.Services;
+using Application.Interfaces;
 using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ builder.Services.AddSingleton(supabaseClient);
 
 // Registro das dependências
 builder.Services.AddScoped<IUsuario, UsuarioRepository>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 // Configuração de CORS para o frontend AngularJS
