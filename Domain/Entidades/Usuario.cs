@@ -12,15 +12,15 @@ public class Usuario : BaseModel
 
     [Required]
     [Column("nome")]
-    public string Nome { get; set; }
+    public string Nome { get; set; } = string.Empty;
 
     [Required]
     [Column("email")]
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 
     [Required]
     [Column("senha_hash")]
-    public string SenhaHash { get; set; }
+    public string SenhaHash { get; set; } = string.Empty;
 
     [Column("criado_em")]
     public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
