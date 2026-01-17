@@ -8,6 +8,6 @@ namespace Interfaces.IUsuarioService;
 /// </summary>
 public interface IUsuarioService
 {
-    Task<ApiResponseDto<LoginDto>> LoginAsync(string email, string senha, bool rememberMe);
+    Task<ApiResponseDto<LoginResponseDto>> LoginAsync(string email, string senha, bool rememberMe);
     Task<ApiResponseDto<CadastroDto>> CadastrarAsync(string nome, string email, string senha);
 }

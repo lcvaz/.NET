@@ -1,4 +1,5 @@
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.DTOs;
 using Interfaces.IUsuario;
 using Interfaces.IUsuarioService;
@@ -12,29 +13,42 @@ namespace Application.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuario _usuarioRepository;
+    private readonly IJwtService _jwtService;
 
-    public UsuarioService(IUsuario usuarioRepository)
+    public UsuarioService(IUsuario usuarioRepository, IJwtService jwtService)
     {
         _usuarioRepository = usuarioRepository;
+        _jwtService = jwtService;
     }
 
-    public async Task<ApiResponseDto<LoginDto>> LoginAsync(string email, string senha, bool rememberMe)
+    public async Task<ApiResponseDto<LoginResponseDto>> LoginAsync(string email, string senha, bool rememberMe)
     {
         var resultado = await _usuarioRepository.GetUsuarioByEmailAsync(email);
 
         if (!resultado.Sucesso || resultado.Data == null)
-            return ApiResponseDto<LoginDto>.NotFound("Usuário não encontrado");
+            return ApiResponseDto<LoginResponseDto>.NotFound("Usuário não encontrado");
 
         if (!BCrypt.Net.BCrypt.Verify(senha, resultado.Data.SenhaHash))
-            return ApiResponseDto<LoginDto>.Unauthorized("Email ou senha inválidos");
+            return ApiResponseDto<LoginResponseDto>.Unauthorized("Email ou senha inválidos");
 
-        var loginDto = new LoginDto
+        var token = _jwtService.GenerateToken(resultado.Data, rememberMe);
+        var expiresIn = _jwtService.GetExpirationTime(rememberMe);
+
+        var loginResponse = new LoginResponseDto
         {
-            Email = resultado.Data.Email,
-            Senha = string.Empty
+            Token = token,
+            ExpiresIn = expiresIn,
+            Status = 200,
+            Usuario = new UsuarioDto
+            {
+                Id = resultado.Data.Id,
+                Nome = resultado.Data.Nome,
+                Email = resultado.Data.Email,
+                DataCadastro = resultado.Data.DataCriacao
+            }
         };
 
-        return ApiResponseDto<LoginDto>.Ok(loginDto, "Login realizado com sucesso");
+        return ApiResponseDto<LoginResponseDto>.Ok(loginResponse, "Login realizado com sucesso");
     }
 
     public async Task<ApiResponseDto<CadastroDto>> CadastrarAsync(string nome, string email, string senha)

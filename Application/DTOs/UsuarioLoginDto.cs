@@ -11,4 +11,6 @@ public class LoginDto
     [Required(ErrorMessage = "A senha é obrigatória")]
     [MinLength(6, ErrorMessage = "A senha deve ter no mínimo 6 caracteres")]
     public string Senha { get; set; } = string.Empty;
+
+    public bool LembrarMe { get; set; } = false;
 }

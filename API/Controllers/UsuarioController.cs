@@ -19,11 +19,15 @@ public class UsuarioController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         if (!ModelState.IsValid)
-            return BadRequest(ApiResponseDto<LoginDto>.BadRequest("Dados inválidos"));
+            return BadRequest(ApiResponseDto<LoginResponseDto>.BadRequest("Dados inválidos"));
 
-        var resultado = await _usuarioService.LoginAsync(loginDto.Email, loginDto.Senha, false);
+        var resultado = await _usuarioService.LoginAsync(loginDto.Email, loginDto.Senha, loginDto.LembrarMe);
 
-        return StatusCode(resultado.StatusCode, resultado);
+        if (!resultado.Sucesso)
+            return StatusCode(resultado.StatusCode, resultado);
+
+        // Retorna diretamente o LoginResponseDto para o frontend
+        return Ok(resultado.Data);
     }
 
     [HttpPost("cadastrar")]
