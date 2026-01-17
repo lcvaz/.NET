@@ -1,6 +1,5 @@
 using Domain.Entidades.Usuario;
 using Interfaces.IUsuario;
-using Supabase;
 
 namespace Infraestructure.Repositories;
 
