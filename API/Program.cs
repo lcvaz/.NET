@@ -1,8 +1,26 @@
-var builder = WebApplication.CreateBuilder(args);  
+using Interfaces.IUsuario;
+using Interfaces.IUsuarioService;
+using Infraestructure.Repositories;
+using Application.Services;
+using Supabase;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddOpenApi();
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
+
+// Configuração do Supabase
+var supabaseUrl = builder.Configuration["Supabase:Url"];
+var supabaseKey = builder.Configuration["Supabase:Key"];
+var supabaseClient = new Supabase.Client(supabaseUrl, supabaseKey);
+await supabaseClient.InitializeAsync();
+
+builder.Services.AddSingleton(supabaseClient);
+
+// Registro das dependências
+builder.Services.AddScoped<IUsuario, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 // Configuração de CORS para o frontend AngularJS
 builder.Services.AddCors(options =>
