@@ -390,7 +390,7 @@
           "bin/placeholder/Domain.dll": {}
         }
       },
-      "infraestructure/1.0.0": {
+      "Infraestructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
@@ -399,10 +399,10 @@
           "supabase-csharp": "0.16.2"
         },
         "compile": {
-          "bin/placeholder/infraestructure.dll": {}
+          "bin/placeholder/Infraestructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/infraestructure.dll": {}
+          "bin/placeholder/Infraestructure.dll": {}
         }
       }
     }
@@ -863,19 +863,19 @@
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
     },
-    "infraestructure/1.0.0": {
+    "Infraestructure/1.0.0": {
       "type": "project",
-      "path": "../Infraestructure/infraestructure.csproj",
-      "msbuildProject": "../Infraestructure/infraestructure.csproj"
+      "path": "../Infraestructure/Infraestructure.csproj",
+      "msbuildProject": "../Infraestructure/Infraestructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "Application >= 1.0.0",
       "BCrypt.Net-Next >= 4.0.3",
+      "Infraestructure >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.2",
       "Microsoft.AspNetCore.OpenApi >= 10.0.0",
-      "infraestructure >= 1.0.0",
       "supabase-csharp >= 0.16.2"
     ]
   },
@@ -907,8 +907,8 @@
             "C:\\Vs code\\.NET\\Application\\Application.csproj": {
               "projectPath": "C:\\Vs code\\.NET\\Application\\Application.csproj"
             },
-            "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj": {
-              "projectPath": "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj"
+            "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj": {
+              "projectPath": "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj"
             }
           }
         }

@@ -657,9 +657,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj",
-      "projectName": "infraestructure",
-      "projectPath": "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj",
+      "projectUniqueName": "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj",
+      "projectName": "Infraestructure",
+      "projectPath": "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj",
       "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
       "outputPath": "C:\\Vs code\\.NET\\Infraestructure\\obj\\",
       "projectStyle": "PackageReference",
@@ -1006,7 +1006,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.IdentityModel.JsonWebTokens' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
+      "message": "O pacote 'Microsoft.IdentityModel.JsonWebTokens' 7.0.3 tem uma moderado vulnerabilidade de gravidade conhecida, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
       "libraryId": "Microsoft.IdentityModel.JsonWebTokens",
       "targetGraphs": [
         "net10.0"
@@ -1016,7 +1016,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'System.IdentityModel.Tokens.Jwt' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
+      "message": "O pacote 'System.IdentityModel.Tokens.Jwt' 7.0.3 tem uma moderado vulnerabilidade de gravidade conhecida, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net10.0"

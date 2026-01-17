@@ -1,0 +1,16 @@
+C:\Vs code\.NET\Application\bin\Debug\net10.0\Application.deps.json
+C:\Vs code\.NET\Application\bin\Debug\net10.0\Application.dll
+C:\Vs code\.NET\Application\bin\Debug\net10.0\Application.pdb
+C:\Vs code\.NET\Application\bin\Debug\net10.0\Domain.dll
+C:\Vs code\.NET\Application\bin\Debug\net10.0\Domain.pdb
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.csproj.AssemblyReference.cache
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.AssemblyInfoInputs.cache
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.AssemblyInfo.cs
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.csproj.CoreCompileInputs.cache
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.sourcelink.json
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Applicat.44B5EDA2.Up2Date
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.dll
+C:\Vs code\.NET\Application\obj\Debug\net10.0\refint\Application.dll
+C:\Vs code\.NET\Application\obj\Debug\net10.0\Application.pdb
+C:\Vs code\.NET\Application\obj\Debug\net10.0\ref\Application.dll

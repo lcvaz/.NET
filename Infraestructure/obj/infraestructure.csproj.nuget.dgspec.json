@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj": {}
+    "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj": {}
   },
   "projects": {
     "C:\\Vs code\\.NET\\Domain\\Domain.csproj": {
@@ -343,12 +343,12 @@
         }
       }
     },
-    "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj": {
+    "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj",
-        "projectName": "infraestructure",
-        "projectPath": "C:\\Vs code\\.NET\\Infraestructure\\infraestructure.csproj",
+        "projectUniqueName": "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj",
+        "projectName": "Infraestructure",
+        "projectPath": "C:\\Vs code\\.NET\\Infraestructure\\Infraestructure.csproj",
         "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
         "outputPath": "C:\\Vs code\\.NET\\Infraestructure\\obj\\",
         "projectStyle": "PackageReference",
